@@ -1,7 +1,7 @@
 import re
 
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import PasswordField
+from rest_framework_simplejwt.serializers import PasswordField, TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from users.models import User
@@ -108,3 +108,21 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.access = token['access']
 
         return user
+
+
+class LoginTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    登录获取token序列化器
+    """
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        refresh = self.get_token(self.user)
+
+        data['id'] = self.user.id
+        data['username'] = self.user.username
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+
+        return data

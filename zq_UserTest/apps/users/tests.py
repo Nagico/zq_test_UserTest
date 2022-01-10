@@ -171,3 +171,79 @@ class RegisterTest(TestCase):
 
         self.assertEqual(response.status_code, 400)
 
+
+class LoginTest(TestCase):
+    """
+    登录测试
+    """
+    def setUp(self):
+        """
+        初始化
+        """
+        self.client = Client()
+        self.REGISTER_URL = '/users/register/'
+        self.LOGIN_URL = '/users/login/'
+        self.REFRESH_URL = '/users/refresh/'
+
+        # 注册用户
+        response = self.client.post(self.REGISTER_URL, {
+            'username': 'testusername',
+            'nickname': 'testnickname',
+            'password': 'test123456789',
+            'password2': 'test123456789',
+            'mobile': '13800138000'
+        })
+
+        self.id = response.json()['id']
+        self.username = response.json()['username']
+        self.refresh = response.json()['refresh']
+
+    def test_login_success(self):
+        """
+        测试登录成功
+        :return:
+        """
+        response = self.client.post(self.LOGIN_URL, {
+            'username': 'testusername',
+            'password': 'test123456789'
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['id'], self.id)
+        self.assertEqual(response.json()['username'], self.username)
+
+    def test_login_username_not_exist(self):
+        """
+        测试登录，用户名不存在
+        :return:
+        """
+        response = self.client.post(self.LOGIN_URL, {
+            'username': 'testusername1',
+            'password': 'test123456789'
+        })
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_login_password_not_match(self):
+        """
+        测试登录，密码不匹配
+        :return:
+        """
+        response = self.client.post(self.LOGIN_URL, {
+            'username': 'testusername',
+            'password': 'test1234567891'
+        })
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_refresh_success(self):
+        """
+        测试刷新成功
+        :return:
+        """
+        response = self.client.post(self.REFRESH_URL, {
+            'refresh': self.refresh
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response.json()['access']), str)

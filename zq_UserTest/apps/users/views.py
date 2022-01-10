@@ -4,8 +4,9 @@ from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from users.serializers import RegisterSerializer
+from users.serializers import RegisterSerializer, LoginTokenObtainPairSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -29,4 +30,15 @@ class RegisterView(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save()
-        logger.info(f'[user/register] create user {self.request.data}')  # 记录日志
+        logger.info(f'[users/register] create user {self.request.data}')  # 记录日志
+
+
+class LoginTokenObtainPairView(TokenObtainPairView):
+    """
+    用户登录 token 获取视图
+    """
+    serializer_class = LoginTokenObtainPairSerializer  # 指定自定义的序列化器，校验密码
+
+    def post(self, request, *args, **kwargs):
+        logger.info(f'[users/login] get user {request.user} token')  # 记录日志
+        return super().post(request, *args, **kwargs)
