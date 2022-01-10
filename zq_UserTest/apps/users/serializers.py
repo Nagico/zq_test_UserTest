@@ -169,7 +169,7 @@ class UserSerializer(serializers.ModelSerializer):
         :param attrs:
         :return:
         """
-        if hasattr(attrs, 'password') and hasattr(attrs, 'password2'):
+        if 'password' in attrs and 'password2' in attrs:
             # rsa 解密
             password = attrs['password']
             password2 = attrs['password2']
