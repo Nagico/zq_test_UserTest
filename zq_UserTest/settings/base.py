@@ -183,3 +183,6 @@ SIMPLE_JWT = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 AVATAR_BASE_WIDTH = 400
+
+# 自定义用户类
+AUTH_USER_MODEL = 'users.User'
