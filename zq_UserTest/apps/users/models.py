@@ -12,7 +12,7 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatar', default='avatar/default.jpg', verbose_name='头像',
                                storage=AvatarStorage)
     mobile = models.CharField(max_length=11, unique=True, verbose_name='手机号')
-    nickname = models.CharField(max_length=20, unique=True, verbose_name='昵称')
+    nickname = models.CharField(max_length=20, unique=False, verbose_name='昵称')
     description = models.CharField(max_length=200, default='', verbose_name='个人简介')
 
     class Meta:
