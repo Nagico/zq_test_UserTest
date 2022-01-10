@@ -13,7 +13,7 @@ class User(AbstractUser):
                                storage=AvatarStorage)
     mobile = models.CharField(max_length=11, unique=True, verbose_name='手机号')
     nickname = models.CharField(max_length=20, unique=True, verbose_name='昵称')
-    description = models.CharField(max_length=200, verbose_name='个人简介')
+    description = models.CharField(max_length=200, default='', verbose_name='个人简介')
 
     class Meta:
         app_label = 'users'
