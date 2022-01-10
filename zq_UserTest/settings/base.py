@@ -150,6 +150,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 
+    # 自定义渲染器
+    'DEFAULT_RENDERER_CLASSES': [
+        'zq_UserTest.utils.renderers.CustomRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
     # api 默认文档
     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 

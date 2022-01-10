@@ -7,6 +7,7 @@ from rest_framework_simplejwt.serializers import PasswordField, TokenObtainPairS
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from users.models import User
+import zq_UserTest.utils.exceptions.clients.register as register_exceptions
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -21,6 +22,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     # 需要序列化（后端响应）的字段 ['id', 'username', 'mobile', 'access', 'refresh']
     # 需要反序列化（前端传入）的字段 ['username', 'nickname', 'password', 'password2', 'mobile']  write_only=True
 
+    username = serializers.CharField(label='用户名', help_text='用户名', required=True, allow_blank=False)
+    mobile = serializers.CharField(label='手机号', help_text='手机号', required=True, allow_blank=False)
     password = PasswordField(label='密码', write_only=True)
     password2 = PasswordField(label='确认密码', write_only=True)
     refresh = serializers.CharField(label='刷新令牌', read_only=True)  # JWT
@@ -29,31 +32,36 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'nickname', 'password', 'password2', 'mobile', 'refresh', 'access']  # 序列化器内容
-        extra_kwargs = {  # 简易校验字段
-            'username': {
-                'min_length': 5,
-                'max_length': 20,
-                'error_messages': {  # 自定义校验信息
-                    'min_length': '仅允许5-20个字符的用户名',
-                    'max_length': '仅允许5-20个字符的用户名',
-                }
-            },
-            'nickname': {
-                'min_length': 5,
-                'max_length': 20,
-                'error_messages': {  # 自定义校验信息
-                    'min_length': '仅允许5-20个字符的昵称',
-                    'max_length': '仅允许5-20个字符的昵称',
-                }
-            },
-        }
+
+    def validate_username(self, value):
+        """
+        用户名校验
+        """
+        if not re.match(r'^[a-zA-Z0-9_]{6,16}$', value):
+            raise register_exceptions.UsernameValidationError
+
+        if User.objects.filter(username=value).exists():
+            raise register_exceptions.UsernameAlreadyExistsError
+
+        return value
+
+    def validate_nickname(self, value):
+        """
+        昵称校验
+        """
+        if not re.match(r'^[a-zA-Z0-9_]{6,16}$', value):
+            raise register_exceptions.RegisterValidationError('昵称格式错误')
+
+        return value
 
     def validate_mobile(self, value):
         """
         手机号校验
         """
         if not re.match(r'1[3-9]\d{9}', value):
-            raise serializers.ValidationError('手机号格式错误', code='mobile_invalid')
+            raise register_exceptions.RegisterValidationError('手机号格式错误')
+        if User.objects.filter(mobile=value).exists():
+            raise register_exceptions.RegisterValidationError('手机号已存在')
 
         return value
 
@@ -62,7 +70,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         密码校验
         """
         if not re.match(r'^[A-Za-z\d.,/;:"\'\[\]\\<>|()\-=+`~@$!%*#?&]{8,24}$', value):
-            raise serializers.ValidationError('密码不安全', code='password_invalid')
+            raise register_exceptions.PasswordValidationError
 
         return value
 
@@ -72,7 +80,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         """
         # 判断两次密码是否一致
         if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError('密码不一致', code='password_not_match')
+            raise register_exceptions.PasswordUniformityError
 
         return attrs
 
@@ -151,15 +159,35 @@ class UserSerializer(serializers.ModelSerializer):
             return settings.DEFAULT_AVATAR_PATH
 
         if value.content_type not in ['image/jpeg', 'image/png', 'image/gif']:  # 文件类型不正确
-            raise serializers.ValidationError('该文件不是图片类型', code='avatar_not_image')
+            raise register_exceptions.FileTypeError
 
         if value.size > 1024 * 1024 * 2:  # 头像文件大于2M
-            raise serializers.ValidationError('头像大小大于 2MB', code='avatar_too_large')
+            raise register_exceptions.FileTooLargeError
         if value.size < 1024:  # 头像文件小于1KB
-            raise serializers.ValidationError('头像大小小于 1KB', code='avatar_too_small')
+            raise register_exceptions.FileTooSmallError
 
         if self.instance.avatar != settings.DEFAULT_AVATAR_PATH:  # 已存在头像文件
             self.instance.avatar.delete()  # 删除原头像文件
+
+        return value
+
+    def validate_nickname(self, value):
+        """
+        昵称校验
+        """
+        if not re.match(r'^[a-zA-Z0-9_]{6,16}$', value):
+            raise register_exceptions.RegisterValidationError('昵称格式错误')
+
+        return value
+
+    def validate_password(self, value):
+        """
+        密码校验
+        """
+        if not value:
+            return value
+        if not re.match(r'^[A-Za-z\d.,/;:"\'\[\]\\<>|()\-=+`~@$!%*#?&]{8,24}$', value):
+            raise register_exceptions.PasswordValidationError
 
         return value
 
@@ -175,7 +203,7 @@ class UserSerializer(serializers.ModelSerializer):
             password2 = attrs['password2']
 
             if password != password2:
-                raise serializers.ValidationError('Password does not match', code='password_not_match')
+                raise register_exceptions.PasswordUniformityError
 
             attrs['password'] = make_password(password)
             attrs.pop('password2')  # 删除密码2
