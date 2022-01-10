@@ -1,4 +1,4 @@
-from rest_framework.exceptions import NotAuthenticated
+from rest_framework.exceptions import NotAuthenticated, ValidationError
 from rest_framework.views import exception_handler as drf_exception_handler
 import logging
 from django.db import DatabaseError
@@ -82,6 +82,7 @@ DEFAULT_MSG = {
         'A0803': '用户 API 请求版本过低',
         'A1000': '用户设备异常',
         'A1100': '用户信息接口错误',
+        'C0300': ('数据库服务出错', drf_status.HTTP_507_INSUFFICIENT_STORAGE),
     }
 
 
@@ -134,6 +135,10 @@ def exception_handler(exc, context):
         # token错误
         return get_zq_exception_response('A0205')
 
+    if isinstance(exc, ValidationError):
+        # 校验失败
+        return get_zq_exception_response('A0402')
+
     # 调用drf框架原生的异常处理方法
     response = drf_exception_handler(exc, context)
 
@@ -143,7 +148,7 @@ def exception_handler(exc, context):
         if isinstance(exc, DatabaseError) or isinstance(exc, RedisError):
             # 数据库异常
             logger.error('[%s] %s' % (view, exc))
-            response = Response({'message': '服务器内部错误'}, status=drf_status.HTTP_507_INSUFFICIENT_STORAGE)
+            response = get_zq_exception_response('C0300')
 
     return response
 

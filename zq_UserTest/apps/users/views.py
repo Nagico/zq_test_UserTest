@@ -22,17 +22,6 @@ class RegisterView(CreateAPIView):
     """
     serializer_class = RegisterSerializer
 
-    def post(self, request, *args, **kwargs):
-        """
-        重写 post，截获异常，规范输出
-        """
-        try:
-            return super().post(request, *args, **kwargs)
-        except ValidationError as e:
-            # 当出现校验失败异常时，返回首要错误信息
-            for k, v in e.detail.items():
-                return Response({'detail': v[0]}, status=status.HTTP_400_BAD_REQUEST)
-
     def perform_create(self, serializer):
         serializer.save()
         logger.info(f'[users/register] create user {self.request.data}')  # 记录日志

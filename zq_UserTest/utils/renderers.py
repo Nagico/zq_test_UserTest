@@ -1,4 +1,5 @@
 # 自定义返回格式
+from rest_framework.exceptions import ErrorDetail
 from rest_framework.renderers import JSONRenderer
 
 
@@ -13,8 +14,8 @@ class CustomRenderer(JSONRenderer):
                 code = data.pop('zq_code', '00000')
             # 自定义返回数据格式
             ret = {
-                'msg': msg,
                 'code': code,
+                'msg': msg,
                 'data': data,
             }
             # 返回JSON数据

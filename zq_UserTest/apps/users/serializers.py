@@ -3,11 +3,13 @@ import re
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import PasswordField, TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from users.models import User
 import zq_UserTest.utils.exceptions.clients.register as register_exceptions
+import zq_UserTest.utils.exceptions.clients.login as login_exceptions
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -126,7 +128,10 @@ class LoginTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
 
     def validate(self, attrs):
-        data = super().validate(attrs)
+        try:
+            data = super().validate(attrs)
+        except AuthenticationFailed as e:
+            raise login_exceptions.LoginError
 
         refresh = self.get_token(self.user)
 
