@@ -5,3 +5,4 @@ redis==4.1.0
 django-cors-headers==3.11.0
 drf_spectacular==0.21.0
 django_filter==21.1
+sentry-sdk==1.5.2
