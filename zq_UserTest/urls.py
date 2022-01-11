@@ -16,11 +16,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
+
+from users.views import CurrentTimeViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),  # 用户
+    path('time/', CurrentTimeViewSet.as_view({  # 本用户anime收藏
+        'get': 'list'
+    }), name='user'),
 ]
 
 # 添加静态文件路径 仅 DEBUG 可以使用

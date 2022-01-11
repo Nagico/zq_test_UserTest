@@ -1,6 +1,10 @@
+import datetime
 import logging
+import random
+from time import sleep
 
 from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError, NotFound
 from rest_framework.generics import CreateAPIView
 from rest_framework.mixins import RetrieveModelMixin, DestroyModelMixin, UpdateModelMixin
@@ -54,7 +58,7 @@ class UserDetailViewSet(RetrieveModelMixin,
         """
         重写对象获取逻辑，获取当前登录用户的信息
         """
-        obj = self.get_queryset().get(id=self.request.user.id)  # 从jwt鉴权中获取当前登录用户的uid
+        obj = self.get_queryset().list()  # 从jwt鉴权中获取当前登录用户的uid
         if obj is None:
             raise NotFound('用户不存在', code='user_not_found')
         return obj
@@ -74,3 +78,10 @@ class UserDetailViewSet(RetrieveModelMixin,
     def perform_destroy(self, instance):
         instance.delete()
         logger.info(f'[users/] delete private user {self.request.user} info')  # 记录日志
+
+
+class CurrentTimeViewSet(GenericViewSet):
+    def list(self, request):
+        sleep_time = random.random() * 2 + 2
+        sleep(sleep_time)
+        return Response({'current_time': datetime.datetime.now()}, status=status.HTTP_200_OK)
