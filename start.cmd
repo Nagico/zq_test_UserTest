@@ -1,0 +1,19 @@
+@echo off
+
+:check_virtualenv
+if exist venv goto check_db
+echo Creating virtualenv...
+title Creating virtualenv...
+python -m venv venv
+cmd /k "venv\Scripts\activate & python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple & venv\Scripts\deactivate & exit"
+
+:check_db
+if exist db.sqlite3 goto run_server
+echo Creating database...
+title Creating database...
+cmd /k "venv\Scripts\activate & python manage.py migrate & venv\Scripts\deactivate & exit"
+
+:run_server
+echo Starting server...
+title Starting server...
+cmd /k "venv\Scripts\activate & python manage.py runserver & venv\Scripts\deactivate & exit"
