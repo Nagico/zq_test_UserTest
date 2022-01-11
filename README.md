@@ -24,6 +24,12 @@
 
 **以后使用时只需要执行最后一行命令启动服务即可**
 
+## API 文档
+
+- 在线 API [Postman Workspace](https://www.postman.com/restless-space-5947/workspace/user-test/request/2940417-02bb6053-b9ce-45aa-a822-5f3403c0bb76)
+- Postman 导出数据 [UserTest.postman_collection.json](https://github.com/NagisaCo/zq_UserTest/UserTest.postman_collection.json)
+- 自动生成文档（随项目启动） [Swagger](http://127.0.0.1:8000/docs/)
+
 ## 重置数据
 
 文件夹根目录下 `db.sqlite3` 文件是后台数据库，如需重置数据，请删除该文件。

@@ -1,0 +1,1696 @@
+{
+	"info": {
+		"_postman_id": "6213e385-40b0-4f63-af44-efe70e88b9ae",
+		"name": "UserTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Info",
+			"item": [
+				{
+					"name": "获取个人信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "成功",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:54:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "205"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"00000\",\n    \"msg\": \"success\",\n    \"data\": {\n        \"id\": 3, // 用户 ID\n        \"username\": \"nagico\", // 用户名\n        \"avatar\": \"http://127.0.0.1:8000/media/avatar/20220111003721_60.jpg\", // 头像\n        \"mobile\": \"18382487801\", // 手机号\n        \"nickname\": \"test12457\", // 昵称\n        \"description\": \"123546\" // 个人简介\n    }\n}"
+						},
+						{
+							"name": "未登录",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/users/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:54:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"A0301\",\n    \"msg\": \"未提供访问此功能所需的登录信息\",\n    \"data\": {}\n}"
+						}
+					]
+				},
+				{
+					"name": "修改个人信息",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nickname",
+									"value": "test12457",
+									"description": "昵称",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "avatar",
+									"description": "头像",
+									"type": "file",
+									"src": "/C:/Users/co/Pictures/QQ图片20211026143424.jpg"
+								},
+								{
+									"key": "password",
+									"value": "test123456",
+									"description": "密码",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password2",
+									"value": "test123456",
+									"description": "确认密码",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "123546",
+									"description": "个人简介",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "成功",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nickname",
+											"value": "test12457",
+											"description": "昵称",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "avatar",
+											"description": "头像",
+											"type": "file",
+											"src": "/C:/Users/co/Pictures/QQ图片20211026143424.jpg"
+										},
+										{
+											"key": "password",
+											"value": "test123456",
+											"description": "密码",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "password2",
+											"value": "test123456",
+											"description": "确认密码",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "123546",
+											"description": "个人简介",
+											"type": "default",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:55:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "205"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"00000\",\n    \"msg\": \"success\",\n    \"data\": {\n        \"id\": 3,\n        \"username\": \"nagico\",\n        \"avatar\": \"http://127.0.0.1:8000/media/avatar/20220111025547_60.jpg\",\n        \"mobile\": \"18382487801\",\n        \"nickname\": \"test12457\",\n        \"description\": \"123546\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "登录",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "nagico",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "test123456",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/login/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "成功",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "nagico",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "test123456",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/login/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:39:36 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "550"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"00000\",\n    \"msg\": \"success\",\n    \"data\": {\n        \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MjcwMzk3NiwiaWF0IjoxNjQxODM5OTc2LCJqdGkiOiJiYmJlOGU2NWVkYzY0MjlhODgxZjg3MWEwZjdhODZhMCIsInVzZXJfaWQiOjN9.XXs97y40-wqKDQAFfICD8Fp4jlkWAUZGvcTLoIXpgv4\",\n        \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQxOTI2Mzc2LCJpYXQiOjE2NDE4Mzk5NzYsImp0aSI6Ijc1NGJhYzA5ZGI0MzQwMGJiNmVhZjU2MTE3ODUzNTZmIiwidXNlcl9pZCI6M30.oooANd8Wzz6vH4w2rr5N2GFNpY0Td-Fml9MqrC8oako\",\n        \"id\": 3,\n        \"username\": \"nagico\"\n    }\n}"
+						},
+						{
+							"name": "用户名或密码错误",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "nagico",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "test1234567",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/login/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:53:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"A0201\",\n    \"msg\": \"用户名或密码错误\",\n    \"data\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Refresh",
+			"item": [
+				{
+					"name": "刷新 Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "refresh",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MjY5Njk5MCwiaWF0IjoxNjQxODMyOTkwLCJqdGkiOiJlMmJkZjI5MGY0N2I0Y2VlYTYwNTg1OGQxNjliZjU4NSIsInVzZXJfaWQiOjN9.0heSWHtBxishiFnDNonbb1BSLzUg9t0Fl6t8eua-HVs",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/refresh/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "成功",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refresh",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MjY5Njk5MCwiaWF0IjoxNjQxODMyOTkwLCJqdGkiOiJlMmJkZjI5MGY0N2I0Y2VlYTYwNTg1OGQxNjliZjU4NSIsInVzZXJfaWQiOjN9.0heSWHtBxishiFnDNonbb1BSLzUg9t0Fl6t8eua-HVs",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/refresh/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:29:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "281"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"success\",\n    \"code\": \"00000\",\n    \"data\": {\n        \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQxOTI1Nzg0LCJpYXQiOjE2NDE4MzI5OTAsImp0aSI6IjY0OTRkNWI1ZjgwYjQxOWNiODY3M2VlMWUyY2UzNGQ5IiwidXNlcl9pZCI6M30.2-1OzPwsPEJPiT_05_MgAto6tOOeK5OAod6Zdpx26vQ\"\n    }\n}"
+						},
+						{
+							"name": "token失效",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refresh",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MjY5Njk5MCwiaWF0IjoxNjQxODMyOTkwLCJqdGkiOiJlMmJkZjI5MGY0N2I0Y2VlYTYwNTg1OGQxNjliZjU4NSIsInVzZXJfaWQiOjN9.0heSWHtBxishiFnDNonbb1BSLzUg9t0Fl6t8eua-HVs1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/refresh/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:29:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"用户登录信息异常\",\n    \"code\": \"A0205\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "缺失参数",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refresh",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MjY5Njk5MCwiaWF0IjoxNjQxODMyOTkwLCJqdGkiOiJlMmJkZjI5MGY0N2I0Y2VlYTYwNTg1OGQxNjliZjU4NSIsInVzZXJfaWQiOjN9.0heSWHtBxishiFnDNonbb1BSLzUg9t0Fl6t8eua-HVs1",
+											"type": "default",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/refresh/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:32:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"请求必填参数为空\",\n    \"code\": \"A0402\",\n    \"data\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "注册",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "testusername",
+									"description": "用户名",
+									"type": "default"
+								},
+								{
+									"key": "nickname",
+									"value": "testnickname",
+									"description": "昵称",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"description": "密码",
+									"type": "default"
+								},
+								{
+									"key": "password2",
+									"value": "123456789",
+									"description": "确认密码",
+									"type": "default"
+								},
+								{
+									"key": "mobile",
+									"value": "13512341234",
+									"description": "手机号",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/register/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "注册成功",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "testusername2",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "testnickname",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341230",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:28:03 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "606"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"success\",\n    \"code\": \"00000\",\n    \"data\": {\n        \"id\": 5,\n        \"username\": \"testusername2\",\n        \"nickname\": \"testnickname\",\n        \"mobile\": \"13512341230\",\n        \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MjcwMzI4MywiaWF0IjoxNjQxODM5MjgzLCJqdGkiOiJlMmJiM2E2Y2ZjOTA0MDU0OGYyM2IzYTkyNmQyNDZlMiIsInVzZXJfaWQiOjV9.Lo-m1l2ZddQTbsWjU6uUxqLF4Hrraa440Wpx8CgWBxc\",\n        \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQxOTI1NjgzLCJpYXQiOjE2NDE4MzkyODMsImp0aSI6IjJmMDA4NmM5ODAyNTRiYjg4ZTUwNDEyMzg1YWU3N2I1IiwidXNlcl9pZCI6NX0.d-GV7xmYd7fzSe7ePljj7Td6f6mcsLNyY0EuAguJdNQ\"\n    }\n}"
+						},
+						{
+							"name": "用户名已存在",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "testusername",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "testnickname",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341230",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:28:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"用户名已存在\",\n    \"code\": \"A0111\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "手机号已存在",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "testusername1",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "testnickname",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341234",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:28:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"手机号已存在\",\n    \"code\": \"A0140\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "用户名校验失败",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "123",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "testnickname",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341234",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:28:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"用户名校验失败\",\n    \"code\": \"A0110\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "昵称格式错误",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "test12345",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "123",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341234",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:29:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"昵称格式错误\",\n    \"code\": \"A0140\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "密码格式错误",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "test12345",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "test123",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "123456",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341234",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:29:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"密码格式错误\",\n    \"code\": \"A0120\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "密码不一致",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "test12345",
+											"type": "default"
+										},
+										{
+											"key": "nickname",
+											"value": "test123",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "1234",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341239",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:29:34 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"密码不一致\",\n    \"code\": \"A0121\",\n    \"data\": {}\n}"
+						},
+						{
+							"name": "参数缺失",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "test12345",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "nickname",
+											"value": "test123",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "password2",
+											"value": "1234",
+											"type": "default"
+										},
+										{
+											"key": "mobile",
+											"value": "13512341239",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/users/register/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 10 Jan 2022 18:39:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"A0402\",\n    \"msg\": \"请求必填参数为空\",\n    \"data\": {}\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/time/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"time",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "成功",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/time/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"time",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 11 Jan 2022 05:39:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.8"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "85"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"00000\",\n    \"msg\": \"success\",\n    \"data\": {\n        \"current_time\": \"2022-01-11T13:39:52.084156\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
