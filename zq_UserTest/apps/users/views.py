@@ -58,10 +58,10 @@ class UserDetailViewSet(RetrieveModelMixin,
         """
         重写对象获取逻辑，获取当前登录用户的信息
         """
-        obj = self.get_queryset().list()  # 从jwt鉴权中获取当前登录用户的uid
-        if obj is None:
+        obj = self.get_queryset()  # 从jwt鉴权中获取当前登录用户的uid
+        if obj.count() == 0:
             raise NotFound('用户不存在', code='user_not_found')
-        return obj
+        return obj[0]
 
     def retrieve(self, request, *args, **kwargs):
         logger.info(f'[users/] get private user {request.user} info')  # 记录日志
