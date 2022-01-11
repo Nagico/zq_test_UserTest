@@ -19,14 +19,16 @@ from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from users.views import CurrentTimeViewSet
+from zq_UserTest.utils.views import APIRootViewSet
 
 urlpatterns = [
-    path('users/', include('users.urls')),  # 用户
+    path('users/', include('users.urls'), name='users'),  # 用户
     path('time/', CurrentTimeViewSet.as_view({  # 本用户anime收藏
         'get': 'list'
-    }), name='user'),
+    }), name='time'),
     path('api_schema/', SpectacularAPIView.as_view(), name='schema'),  # API 文档
-    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # swagger接口文档
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),  # swagger接口文档
+    path('', APIRootViewSet.as_view({'get': 'list'}), name='root'),
 ]
 
 # 添加静态文件路径 仅 DEBUG 可以使用

@@ -19,6 +19,6 @@ urlpatterns = [
         'put': 'update',
         'patch': 'partial_update',
         'delete': 'destroy'
-    }), name='user'),
+    }), name='user_detail'),
 ]
 
