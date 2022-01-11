@@ -2,46 +2,31 @@
 
 该项目仅供测试，请勿用于生产环境。
 
-### 本地使用
+## 本地使用
 
-请确保安装 python 3.8 及以上的版本，并进行虚拟环境配置。推荐使用 conda 进行虚拟环境管理。
+请确保安装 python 3.8 及以上的版本。
 
-#### 虚拟环境
+### Windows
 
-- 使用 Conda（推荐）
+打开 `start.cmd` 即可
 
-事先安装好 conda，并将其设置为环境变量。
+### Linux / OSX
 
-```shell
-conda create -n zq_UserTest_dev python=3.8
-conda activate zq_UserTest_dev
-```
+安装 python3 及其 venv 包
 
-- 使用 python 默认 venv（方便）
+使用 `python3 -m venv venv` 创建 venv 环境，并执行 `source venv/bin/activate` 进入依赖环境
 
-具体的激活路径请参考使用的终端类型以及 `\venv\Scripts\` 目录。
+执行 `python3 -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 安装依赖
 
-```shell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
+执行 `python3 manage.py migrate` 创建数据库表
 
-- 直接使用 python（也可以）
+执行 `python3 manage.py runserver` 启动服务
 
-### 安装依赖
+**以后使用时只需要执行最后一行命令启动服务即可**
 
-```shell
-pip install -r requirements.txt
-```
+## 重置数据
 
-### 迁移数据库
+文件夹根目录下 `db.sqlite3` 文件是后台数据库，如需重置数据，请删除该文件。
 
-```shell
-python manage.py migrate
-```
-
-### 启动服务
-
-```shell
-python manage.py runserver
-```
+- windows 下重新打开 `start.cmd` 即可
+- 其他系统需要执行 `python3 manage.py migrate` 创建数据库表，再执行 `python3 manage.py runserver` 启动服务
