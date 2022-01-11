@@ -15,18 +15,20 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path, include
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from users.views import CurrentTimeViewSet
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('users/', include('users.urls')),  # 用户
     path('time/', CurrentTimeViewSet.as_view({  # 本用户anime收藏
         'get': 'list'
     }), name='user'),
+    path('api_schema/', SpectacularAPIView.as_view(), name='schema'),  # API 文档
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # swagger接口文档
 ]
 
 # 添加静态文件路径 仅 DEBUG 可以使用
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

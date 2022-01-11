@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',  # DRF
     'corsheaders',  # CORS 跨域
     'rest_framework_simplejwt',  # JWT
-    # 'drf_spectacular',  # api 文档
+    'drf_spectacular',  # api 文档
     'django_filters',  # 过滤器
 
     'users',  # 用户
@@ -193,3 +193,11 @@ DEFAULT_AVATAR_PATH = 'avatar/default.jpg'
 
 # 自定义用户类
 AUTH_USER_MODEL = 'users.User'
+
+# API 文档设置
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API接口文档',
+    # 'DESCRIPTION': '',
+    'VERSION': '1.0.0',
+    # OTHER SETTINGS
+}
