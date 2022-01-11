@@ -27,7 +27,7 @@
 ## API 文档
 
 - 在线 API [Postman Workspace](https://www.postman.com/restless-space-5947/workspace/user-test/request/2940417-02bb6053-b9ce-45aa-a822-5f3403c0bb76)
-- Postman 导出数据 [UserTest.postman_collection.json](https://github.com/NagisaCo/zq_UserTest/UserTest.postman_collection.json)
+- Postman 导出数据 [UserTest.postman_collection.json](https://github.com/NagisaCo/zq_test_UserTest/blob/master/UserTest.postman_collection.json)
 - 自动生成文档（随项目启动） [Swagger](http://127.0.0.1:8000/docs/)
 
 ## 重置数据
